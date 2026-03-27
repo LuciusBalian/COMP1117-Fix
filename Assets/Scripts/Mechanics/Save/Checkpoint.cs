@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class Checkpoint : MonoBehaviour
 {
     public SaveManager saveManager; 
 
     private SpriteRenderer sRend;
+
+    public static event Action PlayCheckpointSound;
 
     private void Awake()
     {
@@ -20,7 +23,10 @@ public class Checkpoint : MonoBehaviour
 
             saveManager.SaveGame(collision.transform.position);
 
+            PlayCheckpointSound.Invoke();
+
             Debug.Log("Checkpoint Reached!");
         }
     }
+
 }
